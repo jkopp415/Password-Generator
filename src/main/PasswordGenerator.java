@@ -262,6 +262,7 @@ public class PasswordGenerator {
 
         // Set the frame's settings and display it
         frame.setSize(425, 375);
+        frame.setTitle("Password Generator");
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
