@@ -2,10 +2,9 @@ package password_generator;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class PassGenWindow {
+public class PasswordGenerator {
 
     /**
      * The list of letters that the program can choose from.
