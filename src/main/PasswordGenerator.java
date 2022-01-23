@@ -238,7 +238,6 @@ public class PasswordGenerator {
 
         // Create an action listener for the password generation button
         passGenButton.addActionListener(e -> {
-
             /*
              * Check if an item in the password length combo box is selected,
              * and if so set that as the passLen variable
