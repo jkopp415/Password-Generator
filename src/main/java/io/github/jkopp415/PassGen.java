@@ -1,4 +1,4 @@
-package main.java;
+package main.java.io.github.jkopp415;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -35,7 +35,10 @@ public class PassGen
         return letter;
     }
 
-    // Returns a random character, either a number or a symbol, depending on the function's input
+    /*
+     * Returns a random character, either a number or a symbol, depending on
+     * the function's input
+     */
     private static String getRandomCharacter(String charList)
     {
 
@@ -48,7 +51,10 @@ public class PassGen
     }
 
     // Generates a password based on constraints taken from the GUI
-    public static String generatePassword(int passLen, boolean hasUppercase, String numbers, String symbols)
+    public static String generatePassword(int passLen,
+                                          boolean hasUppercase,
+                                          String numbers,
+                                          String symbols)
     {
 
         // Create a new StringBuilder to hold the password

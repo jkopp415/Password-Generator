@@ -1,4 +1,4 @@
-package main.java;
+package main.java.io.github.jkopp415;
 
 import javax.swing.*;
 import java.awt.*;
@@ -166,7 +166,9 @@ public class PassGenUI
              * Generate a password from the four above variables, and set it as the
              * text in the password display field
              */
-            String password = PassGen.generatePassword(passLen, hasUpper, numList, symbList);
+            String password = PassGen.generatePassword(
+                    passLen, hasUpper, numList, symbList
+            );
             passDispField.setText(password);
         });
 
