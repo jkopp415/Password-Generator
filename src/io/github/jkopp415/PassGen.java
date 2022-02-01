@@ -1,4 +1,4 @@
-package main.java.io.github.jkopp415;
+package io.github.jkopp415;
 
 import java.util.concurrent.ThreadLocalRandom;
 
