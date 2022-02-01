@@ -2,110 +2,20 @@ package main.java;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.ThreadLocalRandom;
 
-public class PasswordGenerator {
-
-    /**
-     * The list of letters that the program can choose from.
-     */
-    private static final String LETTERS = "abcdefghijklmnopqrstuvwxyz";
-
-    /**
-     * Returns a random integer.
-     * @param max One plus the maximum number that {@link ThreadLocalRandom} may return.
-     * @return A random integer between zero and ({@code max} - 1).
-     */
-    private static int getRandomInt(int max) {
-        return ThreadLocalRandom.current().nextInt(0, max);
-    }
-
-    /**
-     * Returns a random letter, with the possibility of being uppercase.
-     * @param hasUppercase Determines if it should be possible for the letter to be uppercase.
-     * @return A letter that is either uppercase or lowercase.
-     */
-    private static String getRandomLetter(boolean hasUppercase) {
-
-        // Pick a random letter from the LETTERS string
-        int randNum = getRandomInt(LETTERS.length());
-        String letter = LETTERS.substring(randNum, randNum + 1);
-
-        /*
-         * If hasUppercase is true, there is a 50% chance that the letter will be
-         * converted to uppercase
-         */
-        if (hasUppercase) {
-            int randCase = getRandomInt(2);
-            return randCase == 0 ? letter : letter.toUpperCase();
-        }
-
-        // If hasUppercase is false, just return the letter to the GUI
-        return letter;
-    }
-
-    /**
-     * Returns a random character, either a number or symbol, depending on the function input.
-     * @param charList The String of numbers or symbols.
-     * @return A random character from the {@code charList} string.
-     */
-    private static String getRandomCharacter(String charList) {
-
-        // Return a blank string if no characters are given in charList
-        if (charList.length() == 0) return "";
-
-        // If there are characters given, pick a random character from the list
-        int randNum = getRandomInt(charList.length());
-        return charList.substring(randNum, randNum + 1);
-    }
-
-    /**
-     * Generates a password based on constraints taken from the GUI.
-     * @param passLen The length of the password
-     * @param hasUppercase Whether the password can contain uppercase letters or not.
-     * @param numbers The list of numbers that are available for the password.
-     * @param symbols The list of symbols that are available for the password.
-     * @return A password of {@code passLen} length, with a mix of uppercase and lowercase letters
-     * (depending on the value of {@code hasUppercase}), numbers from the {@code numbers} string,
-     * and symbols from the {@code symbols} string.
-     */
-    private static String generatePassword(int passLen, boolean hasUppercase, String numbers, String symbols) {
-
-        // Create a new StringBuilder to hold the password
-        StringBuilder password = new StringBuilder();
-
-        // Loop a total of passLen times
-        for (int i = 0; i < passLen; i++) {
-            // Get a random number from 0 to 4 (inclusive)
-            int randNum = getRandomInt(5);
-
-            /*
-             * There is a 20% chance that the next character will be a number, a 20%
-             * chance that the next character will be a symbol, and a 60% chance that
-             * the next character will be either an upper or lowercase letter
-             */
-            if (randNum == 0)
-                password.append(getRandomCharacter(numbers));
-            else if (randNum == 1)
-                password.append(getRandomCharacter(symbols));
-            else
-                password.append(getRandomLetter(hasUppercase));
-        }
-
-        // Convert the password builder to a string and return it to the GUI
-        return password.toString();
-    }
-
-    public static void main(String[] args) {
-
+public class PassGenUI
+{
+    public static void createGUI()
+    {
         // Set the window's look and feel to that of the system's operating system
-        try {
+        try
+        {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }
-        catch (UnsupportedLookAndFeelException |
+        } catch (UnsupportedLookAndFeelException |
                 ClassNotFoundException |
                 InstantiationException |
-                IllegalAccessException e) {
+                IllegalAccessException e)
+        {
             throw new RuntimeException("idk i think something went wrong with the UI");
         }
 
@@ -237,12 +147,13 @@ public class PasswordGenerator {
         // ---------------------------------------------------------
 
         // Create an action listener for the password generation button
-        passGenButton.addActionListener(e -> {
+        passGenButton.addActionListener(e ->
+        {
             /*
              * Check if an item in the password length combo box is selected,
              * and if so set that as the passLen variable
              */
-            Integer passLen = (Integer)passLenCombo.getSelectedItem();
+            Integer passLen = (Integer) passLenCombo.getSelectedItem();
             if (passLen == null)
                 passLen = 12;
 
@@ -255,7 +166,7 @@ public class PasswordGenerator {
              * Generate a password from the four above variables, and set it as the
              * text in the password display field
              */
-            String password = generatePassword(passLen, hasUpper, numList, symbList);
+            String password = PassGen.generatePassword(passLen, hasUpper, numList, symbList);
             passDispField.setText(password);
         });
 
@@ -265,5 +176,10 @@ public class PasswordGenerator {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
+    }
+
+    public static void main(String[] args)
+    {
+        createGUI();
     }
 }
