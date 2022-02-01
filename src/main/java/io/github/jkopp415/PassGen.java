@@ -51,10 +51,8 @@ public class PassGen
     }
 
     // Generates a password based on constraints taken from the GUI
-    public static String generatePassword(int passLen,
-                                          boolean hasUppercase,
-                                          String numbers,
-                                          String symbols)
+    public static String generatePassword(int passLen, boolean hasUppercase,
+                                          String numbers, String symbols)
     {
 
         // Create a new StringBuilder to hold the password
@@ -71,9 +69,9 @@ public class PassGen
              * chance that the next character will be a symbol, and a 60% chance that
              * the next character will be either an upper or lowercase letter
              */
-            if (randNum == 0)
+            if (randNum == 0 && numbers.length() > 0)
                 password.append(getRandomCharacter(numbers));
-            else if (randNum == 1)
+            else if (randNum == 1 && symbols.length() > 0)
                 password.append(getRandomCharacter(symbols));
             else
                 password.append(getRandomLetter(hasUppercase));
